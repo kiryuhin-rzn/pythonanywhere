@@ -2,46 +2,25 @@ from django.http import HttpResponse
 
 from django.views import View
 
+import random
 
 class ToDoView(View):
 
 
-
     def get(self, request, *args, **kwargs):
-        # TODO: Всё ещё актуально:
-        #  Импорты следует делать в начале файла:)
-        import random
 
-        # TODO: Имена переменных должны быть английскими словами, а не русскими, написанными английскими символами:)
-        spisokdel = ["Установить django",
-                     "Запустить сервер",
-                     "Порадоваться результату",
-                     "Рано радоваться",
-                     "Попить чай"
-                     ]
-        random.shuffle(spisokdel)
-        # TODO: 1) Создайте в начале файла после импортов или в теле класса шаблоны:
-        #  LI_TEMPLATE = '<li>{}</li>'
-        #  и
-        #  UL_TEMPLATE = '<ul>{}</ul>'
-        #  2) Создайте пустую переменную типа str
-        #  3) Напишите цикл по списку, в котором наполняйте (+=) переменную тем
-        #  что получается в результате применения метода format() на шаблон LI_TEMPLATE
-        #  с передачей в качестве аргумента элемента итерации
-        #  4) Отправляйте в качестве ответа шаблон UL_TEMPLATE, на который применен метод format()
-        #  с полученной ранее строковой переменной в качестве аргумента:)
-        #  Предлагаю попробовать, если не получится, набросаю псевдокод:):)
-        # TODO: Всё ещё актуально:
-        #  Нейминг должен говорить о том за что отвечает переменная:)
-        a = []
-        for i in spisokdel:
-            a.append(i)
+        LI_TEMPLATE = "<li>{}</li>"
+        UL_TEMPLATE = "<ul>{}</ul>"
 
-        return HttpResponse(
-            "<ul>"
-                "<li>{}</li>".format(a[0]),
-                "<li>{}</li>".format(a[1]),
-                "<li>{}</li>".format(a[2]),
-                "<li>{}</li>".format(a[3]),
-                "<li>{}</li>".format(a[4]),
-            "</ul>")
+        catalog = ["Установить django",
+                   "Запустить сервер",
+                   "Порадоваться результату",
+                   "Рано радоваться",
+                   "Попить чай"]
+
+        random.shuffle(catalog)
+        front_catalog = str()
+        for i in catalog:
+            front_catalog += LI_TEMPLATE.format(i)
+
+        return HttpResponse(UL_TEMPLATE.format(front_catalog))
