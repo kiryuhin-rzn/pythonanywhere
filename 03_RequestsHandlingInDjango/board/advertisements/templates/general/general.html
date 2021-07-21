@@ -1,0 +1,20 @@
+<html>
+<select>
+    {% for advertisement in advertisements %}
+   <option>{{ advertisement }}</option>
+    {% endfor %}
+</select>
+<p>
+<select>
+    {% for region in regions %}
+   <option>{{ region }}</option>
+    {% endfor %}
+</select>
+</p>
+<p><b>Введите название объявления:</b><br>
+   <input type="text" size="40">
+  </p>
+<p>
+<input type="button" value=" Поиск ">
+</p>
+</html>

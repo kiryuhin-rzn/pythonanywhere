@@ -1,7 +1,13 @@
 <html>
 <ul>
-    <li>Мастер на час</li>
-    <li>Выведение из запоя</li>
-    <li>Услуги экскаватора-погрузчика, гидромолота, ямобура</li>
+    {% for advertisement in advertisements %}
+   <li>{{ advertisement }}</li>
+    {% endfor %}
+</ul>
+<ul>
+    <li>{{ post_message }}</li>
+</ul>
+<ul>
+    <li>{{ meter }}</li>
 </ul>
 </html>
