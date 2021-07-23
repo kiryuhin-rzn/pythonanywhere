@@ -2,6 +2,7 @@ from django.core.files import File
 import time
 
 
+# TODO: Класс должен быть обособлен от остального кода на 2 пустые строки:)
 class UserInfoTime:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -9,8 +10,10 @@ class UserInfoTime:
     def __call__(self, request):
 
         t = time.ctime()
+        # TODO: Код должен работать на любом компьютере и/или сервере, а не только вашем
         my_file = open('c:/djangoproekt/python_django/03_RequestsHandlingInDjango/board/board/middleware/file.txt', 'a')
         my_file.write(t)
+        # TODO: Забыли "()"
         my_file.close
 
         response = self.get_response(request)

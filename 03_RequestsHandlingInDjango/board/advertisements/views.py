@@ -11,7 +11,9 @@ def advertisement_list(request, *args, **kwargs):
     return render(request, 'advertisements/advertisement_list.html', {})
 
 
+# TODO: Класс должен быть обособлен от остального кода на 2 пустые строки:)
 class Advertisements(View):
+    # TODO: Методы должны быть обособлены друг от друга на одну пустую строку
     def get(self, request):
         advertisements = [
             'Мастер на час',
@@ -25,6 +27,7 @@ class Advertisements(View):
         return render(request, 'advertisements/advertisement_list.html', {'post_message': post_message}, {'meter': meter})
         meter += 1
 
+# TODO: Не тот родительский класс
 class Contacts(View):
     def get(self, request):
         contacts = [
@@ -34,6 +37,7 @@ class Contacts(View):
         ]
         return render(request, 'contacts/contacts.html', {'contacts': contacts})
 
+# TODO: И здесь:)
 class About(View):
     def get(self, request):
         about = '"ООО Рога и копыта" - оказание всех видов услуг'
