@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView
 
 
 def advertisement_list(request, *args, **kwargs):
@@ -12,7 +11,9 @@ def advertisement_list(request, *args, **kwargs):
     return render(request, 'advertisements/advertisement_list.html', {})
 
 
+# TODO: Класс должен быть обособлен от остального кода на 2 пустые строки:)
 class Advertisements(View):
+    # TODO: Методы должны быть обособлены друг от друга на одну пустую строку
     def get(self, request):
         advertisements = [
             'Мастер на час',
@@ -20,37 +21,27 @@ class Advertisements(View):
             'Услуги экскаватора-погрузчика, гидромолота, ямобура'
         ]
         return render(request, 'advertisements/advertisement_list.html', {'advertisements': advertisements})
-
     def post(self, request):
         meter = 0
         post_message = 'Запрос на создание новой записи успешно выполнен!'
         return render(request, 'advertisements/advertisement_list.html', {'post_message': post_message}, {'meter': meter})
         meter += 1
 
+# TODO: Не тот родительский класс
+class Contacts(View):
+    def get(self, request):
+        contacts = [
+            'Адрес: г. Рязань, ул. Гоголя, д. 13',
+            'телефон: 8(800)000-00-17',
+            'электронная почта: gogol@gmail.com'
+        ]
+        return render(request, 'contacts/contacts.html', {'contacts': contacts})
 
-class Contacts(TemplateView):
-    template_name = 'contacts/contacts.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['name'] = 'Бесплатные объявления в вашем городе'
-        context['title'] = 'Бесплатные объявления'
-        context['discription'] = 'Адрес: г. Рязань, ул. Гоголя, д. 13, телефон: 8(800)000-00-17, электронная почта: gogol@gmail.com'
-
-        return context
-
-
-class About(TemplateView):
-    template_name = 'about/about.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context = super().get_context_data(**kwargs)
-        context['name'] = '"ООО Рога и копыта"'
-        context['title'] = 'Бесплатные объявления'
-        context['discription'] = 'Оказываем все виды услуг'
-
-        return context
+# TODO: И здесь:)
+class About(View):
+    def get(self, request):
+        about = '"ООО Рога и копыта" - оказание всех видов услуг'
+        return render(request, 'about/about.html', {'about': about})
 
 
 class General(View):
@@ -69,4 +60,7 @@ class General(View):
             'Горький'
         ]
         return render(request, 'general/general.html', {'advertisements': advertisements, 'regions': regions})
+
+
+
 

@@ -1,9 +1,7 @@
 <html>
-<title>{{ title }}</title>
-<h2>
-   {{ name }}
-</h2>
 <ul>
-    <li>{{ discription }}</li>
+    {% for contact in contacts %}
+   <li>{{ contact }}</li>
+    {% endfor %}
 </ul>
 </html>
