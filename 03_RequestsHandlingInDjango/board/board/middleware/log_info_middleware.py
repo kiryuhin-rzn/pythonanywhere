@@ -1,3 +1,4 @@
+# TODO: В конце файла должна быть одна пустая строка:)
 import os
 from board.settings import BASE_DIR
 import time
@@ -8,7 +9,10 @@ class UserInfoTime:
         self.get_response = get_response
 
     def __call__(self, request):
+        # TODO: Не информативный нейминг
         t = time.ctime()
+        # TODO: 1) Лучше хранить логи в директории log в корне проекта:)
+        #  2) Не используйте "my_" в нейминге: мы же не в школе:)
         my_file = open(os.path.join(os.path.dirname(__file__), 'file.txt'), 'a')
         my_file.write(t)
         my_file.close()
