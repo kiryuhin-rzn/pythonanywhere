@@ -1,13 +1,22 @@
+<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8" />
+    <title>Django Forms</title>
+</head>
+<body>
 <ul>
     {% for advertisement in advertisements %}
    <li>{{ advertisement }}</li>
     {% endfor %}
 </ul>
-<ul>
-    <li>{{ post_message }}</li>
-</ul>
-<ul>
-    <li>{{ meter }}</li>
-</ul>
+    <form method="POST">
+        {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="Send" >
+</form>
+<li>{{ meter }}</li>
+</body>
 </html>

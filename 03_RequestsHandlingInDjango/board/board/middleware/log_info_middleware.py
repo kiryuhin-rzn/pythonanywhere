@@ -1,6 +1,5 @@
-# TODO: В конце файла должна быть одна пустая строка:)
-import os
 from board.settings import BASE_DIR
+import os
 import time
 
 
@@ -9,13 +8,10 @@ class UserInfoTime:
         self.get_response = get_response
 
     def __call__(self, request):
-        # TODO: Не информативный нейминг
-        t = time.ctime()
-        # TODO: 1) Лучше хранить логи в директории log в корне проекта:)
-        #  2) Не используйте "my_" в нейминге: мы же не в школе:)
-        my_file = open(os.path.join(os.path.dirname(__file__), 'file.txt'), 'a')
-        my_file.write(t)
-        my_file.close()
+        time_request = time.ctime()
+        file_log = open(os.path.join(os.path.dirname(__file__), 'log_file.txt'), 'a')
+        file_log.write(time_request)
+        file_log.close()
 
         response = self.get_response(request)
 
@@ -28,7 +24,7 @@ class UserInfoIp:
 
     def __call__(self, request):
         ip = request.META.get('REMOTE_ADDR')
-        my_file = open(os.path.join(os.path.dirname(__file__), 'file.txt'), 'a')
+        my_file = open(os.path.join(os.path.dirname(__file__), 'log_file.txt'), 'a')
         my_file.write(ip)
         my_file.close()
 
@@ -43,15 +39,14 @@ class UserInfoMethod:
 
     def __call__(self, request):
         if request.method == 'GET':
-            my_file = open(os.path.join(os.path.dirname(__file__), 'file.txt'), 'a')
+            my_file = open(os.path.join(os.path.dirname(__file__), 'log_file.txt'), 'a')
             my_file.write('GET')
             my_file.close()
         if request.method == 'POST':
-            my_file = open(os.path.join(os.path.dirname(__file__), 'file.txt'), 'a')
+            my_file = open(os.path.join(os.path.dirname(__file__), 'log_file.txt'), 'a')
             my_file.write('POST')
             my_file.close()
 
         response = self.get_response(request)
 
         return response
-

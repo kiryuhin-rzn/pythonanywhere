@@ -1,15 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
+from .forms import AdvertisementForm
+from django.http import HttpResponse
 
-
-def advertisement_list(request, *args, **kwargs):
-    advertisements = [
-        'Мастер на час',
-        'Выведение из запоя',
-        'Услуги экскаватора-погрузчика, гидромолота, ямобура'
-    ]
-    return render(request, 'advertisements/advertisement_list.html', {})
 
 
 class Advertisements(View):
@@ -19,16 +13,14 @@ class Advertisements(View):
             'Выведение из запоя',
             'Услуги экскаватора-погрузчика, гидромолота, ямобура'
         ]
-        return render(request, 'advertisements/advertisement_list.html', {'advertisements': advertisements})
+        form = AdvertisementForm()
 
-    # TODO: Работает?:)
+        return render(request, 'advertisements/advertisement_list.html', {'form': form,
+        'advertisements': advertisements})
+
     def post(self, request):
-        meter = 0
-        post_message = 'Запрос на создание новой записи успешно выполнен!'
-        # TODO: Код не должен выходить за вертикальную линию справа
-        return render(request, 'advertisements/advertisement_list.html', {'post_message': post_message}, {'meter': meter})
-        # TODO: Код ниже никогда не будет исполнен
-        meter += 1
+
+        return HttpResponse("<h2>Запрос на создание новой записи успешно выполнен!</h2>")
 
 
 class Contacts(TemplateView):
@@ -38,9 +30,9 @@ class Contacts(TemplateView):
         context = super().get_context_data(**kwargs)
         context['name'] = 'Бесплатные объявления в вашем городе'
         context['title'] = 'Бесплатные объявления'
-        # TODO: 1) Код не должен выходить за вертикальную линию справа
-        #  2) Следует адрес, телефон и мыло записывать в разные ключи
-        context['discription'] = 'Адрес: г. Рязань, ул. Гоголя, д. 13, телефон: 8(800)000-00-17, электронная почта: gogol@gmail.com'
+        context['address'] = 'Адрес: г. Рязань, ул. Гоголя, д. 13'
+        context['telephone'] = 'телефон: 8(800)000-00-17'
+        context['e_mail'] = 'gogol@gmail.com'
 
         return context
 
@@ -49,12 +41,9 @@ class About(TemplateView):
     template_name = 'about/about.html'
 
     def get_context_data(self, **kwargs):
-        # TODO: Лишнее дублирование кода
-        context = super().get_context_data(**kwargs)
         context = super().get_context_data(**kwargs)
         context['name'] = '"ООО Рога и копыта"'
         context['title'] = 'Бесплатные объявления'
-        # TODO: Аналогично
         context['discription'] = 'Оказываем все виды услуг'
 
         return context
@@ -75,5 +64,5 @@ class General(View):
             'Новосибирск',
             'Горький'
         ]
-        return render(request, 'general/general.html', {'advertisements': advertisements, 'regions': regions})
 
+        return render(request, 'general/general.html', {'advertisements': advertisements, 'regions': regions})
