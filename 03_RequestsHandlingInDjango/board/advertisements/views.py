@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 
 
+# TODO: Слишком большой отступ. Двух пустых строк достаточно
 class Advertisements(View):
     def get(self, request):
         advertisements = [
@@ -16,9 +17,12 @@ class Advertisements(View):
         form = AdvertisementForm()
 
         return render(request, 'advertisements/advertisement_list.html', {'form': form,
+                                                                          # TODO: Следует выровнять:)
         'advertisements': advertisements})
 
     def post(self, request):
+        # TODO: Как вариант, можно у этого класса задать атрубут счетчик
+        #  и увеличивать его при каждом вызове этого метода:)
 
         return HttpResponse("<h2>Запрос на создание новой записи успешно выполнен!</h2>")
 
